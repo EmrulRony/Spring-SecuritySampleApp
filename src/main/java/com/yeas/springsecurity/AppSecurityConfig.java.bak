@@ -19,13 +19,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    // @Override
-    // @Bean
-    // protected UserDetailsService userDetailsService() {
-    // List<UserDetails> users = new ArrayList<>();
-    // users.add(User.withDefaultPasswordEncoder().username("emrul").password("2222").roles("USER").build());
-    // return new InMemoryUserDetailsManager(users);
-    // }
+    @Override
+    @Bean
+    protected UserDetailsService userDetailsService() {
+    List<UserDetails> users = new ArrayList<>();
+    users.add(User.withDefaultPasswordEncoder().username("emrul").password("2222").roles("USER").build());
+    return new InMemoryUserDetailsManager(users);
+    }
 
     @Bean
     public AuthenticationProvider authProvider() {
@@ -50,4 +50,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutSuccessUrl("/login").permitAll();
     }
+
+
 }
